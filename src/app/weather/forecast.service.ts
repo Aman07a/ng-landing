@@ -5,4 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class ForecastService {
   constructor() {}
+
+  getCurrentLocation() {
+    window.navigator.geolocation.getCurrentPosition((position) => {
+      this.position = position;
+      getForecastData();
+    });
+  }
 }
