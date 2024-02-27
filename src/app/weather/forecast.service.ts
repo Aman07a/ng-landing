@@ -5,6 +5,15 @@ import { map, switchMap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 
+interface OpenWeatherResponse {
+  list: {
+    dt_txt: string;
+    main: {
+      temp: number;
+    };
+  }[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
