@@ -51,7 +51,6 @@ export class ForecastService {
         (position) => {
           observer.next(position.coords);
           observer.complete();
-          console.log(environment.api_key);
         },
         (err) => observer.error(err)
       );
