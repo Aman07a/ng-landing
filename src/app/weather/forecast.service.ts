@@ -8,6 +8,7 @@ import {
   toArray,
   switchMap,
   share,
+  tap,
 } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
@@ -63,12 +64,20 @@ export class ForecastService {
     return new Observable<GeolocationCoordinates>((observer) => {
       window.navigator.geolocation.getCurrentPosition(
         (position) => {
-          this.notificationsService.addSuccess('Got your location');
           observer.next(position.coords);
           observer.complete();
         },
         (err) => observer.error(err)
       );
-    }).pipe();
+    }).pipe(
+      tap(
+        () => {
+          this.notificationsService.addSuccess('Got your location');
+        },
+        () => {
+          this.notificationsService.addError('Failed to get your location');
+        }
+      )
+    );
   }
 }
