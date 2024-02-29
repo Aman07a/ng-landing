@@ -9,14 +9,10 @@ import { Command, NotificationsService } from '../notifications.service';
   styleUrls: ['./notification-list.component.css'],
 })
 export class NotificationListComponent implements OnInit {
-  messages: Observable<Command[]> | any;
+  messages: Observable<Command[]>;
 
   constructor(private notificationsService: NotificationsService) {
     this.messages = notificationsService.messagesOutput;
-
-    setInterval(() => {
-      notificationsService.addError('IT IS errorly WORKING!!!');
-    }, 500);
   }
 
   ngOnInit() {}

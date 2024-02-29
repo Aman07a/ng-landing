@@ -11,6 +11,7 @@ import {
 } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
+import { NotificationsService } from '../notifications/notifications.service';
 
 interface OpenWeatherResponse {
   list: {
@@ -27,7 +28,12 @@ interface OpenWeatherResponse {
 export class ForecastService {
   private url = 'https://api.openweathermap.org/data/2.5/forecast';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private notificationsService: NotificationsService
+  ) {
+    this.notificationsService.addSuccess('');
+  }
 
   getForecast(): Observable<any[]> {
     return this.getCurrentLocation().pipe(
@@ -57,11 +63,12 @@ export class ForecastService {
     return new Observable<GeolocationCoordinates>((observer) => {
       window.navigator.geolocation.getCurrentPosition(
         (position) => {
+          this.notificationsService.addSuccess('Got your location');
           observer.next(position.coords);
           observer.complete();
         },
         (err) => observer.error(err)
       );
-    });
+    }).pipe();
   }
 }
