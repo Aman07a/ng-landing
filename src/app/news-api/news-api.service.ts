@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
-interface Article {
+export interface Article {
   title: string;
   url: string;
 }
