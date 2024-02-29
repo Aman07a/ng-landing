@@ -12,11 +12,15 @@ interface Command {
   providedIn: 'root',
 })
 export class NotificationsService {
-  messages: Subject<Command> | any;
+  messages: Subject<Command>;
 
   constructor() {
-    this.messages = new Subject<Command>().pipe(
-      scan((acc, value) => {
+    this.messages = new Subject<Command>();
+  }
+
+  getMessages() {
+    return this.messages.pipe(
+      scan((acc: Command[], value: Command) => {
         if (value.type === 'clear') {
           return acc.filter((message) => message.id !== value.id);
         } else {
