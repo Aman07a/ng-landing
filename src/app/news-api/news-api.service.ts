@@ -22,7 +22,7 @@ export class NewsApiService {
   private apiKey = environment.api_key;
   private country = 'nl';
 
-  pagesInput: Subject<number>;
+  private pagesInput: Subject<number>;
   pagesOutput: Observable<any>;
   numberOfPages: Subject<number>;
 
@@ -44,7 +44,12 @@ export class NewsApiService {
       tap((response) => {
         const totalPages = Math.ceil(response.totalResults / this.pageSize);
         this.numberOfPages.next(totalPages);
-      })
+      }),
+      map((response) => response.articles)
     );
+  }
+
+  getPage(page: number) {
+    this.pagesInput.next(page);
   }
 }
