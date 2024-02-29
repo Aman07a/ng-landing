@@ -11,7 +11,7 @@ import { Command, NotificationsService } from '../notifications.service';
 export class NotificationListComponent implements OnInit {
   messages: Observable<Command[]> | any;
 
-  constructor(notificationsService: NotificationsService) {
+  constructor(private notificationsService: NotificationsService) {
     this.messages = notificationsService.messagesOutput;
 
     setInterval(() => {
@@ -20,4 +20,8 @@ export class NotificationListComponent implements OnInit {
   }
 
   ngOnInit() {}
+
+  clearMessage(id: number) {
+    this.notificationsService.clearMessage(id);
+  }
 }
