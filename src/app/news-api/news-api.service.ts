@@ -21,7 +21,7 @@ interface NewsApiResponse {
 export class NewsApiService {
   private url = 'https://newsapi.org/v2/top-headlines';
   private pageSize = 10;
-  private apiKey = environment.api_key;
+  private apiKey = environment.news_api_key;
   private country = 'nl';
 
   private pagesInput: Subject<number>;
