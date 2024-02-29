@@ -5,12 +5,14 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
+interface Article {
+  title: string;
+  url: string;
+}
+
 interface NewsApiResponse {
   totalResults: number;
-  articles: {
-    title: string;
-    url: string;
-  }[];
+  articles: Article[];
 }
 
 @Injectable({
@@ -23,7 +25,7 @@ export class NewsApiService {
   private country = 'nl';
 
   private pagesInput: Subject<number>;
-  pagesOutput: Observable<any>;
+  pagesOutput: Observable<Article[]>;
   numberOfPages: Subject<number>;
 
   constructor(private http: HttpClient) {
