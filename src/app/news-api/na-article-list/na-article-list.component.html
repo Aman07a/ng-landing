@@ -7,6 +7,6 @@
     [href]="article.url"
     target="_blank"
   >
-    {{ article.title | trimOutletName }}
+    {{ article.title | trimOutletName: article.source.name }}
   </a>
 </div>

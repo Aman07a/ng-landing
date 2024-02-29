@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
 export interface Article {
   title: string;
   url: string;
+  source: {
+    name: string;
+  };
 }
 
 interface NewsApiResponse {
