@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { scan } from 'rxjs/operators';
 
 interface Command {
   id: number;
@@ -11,10 +12,18 @@ interface Command {
   providedIn: 'root',
 })
 export class NotificationsService {
-  messages: Subject<Command>;
+  messages: Subject<Command> | any;
 
   constructor() {
-    this.messages = new Subject<any>();
+    this.messages = new Subject<Command>().pipe(
+      scan((acc, value) => {
+        if (value.type === 'clear') {
+          return acc.filter((message) => message.id !== value.id);
+        } else {
+          return [...acc, value];
+        }
+      }, [])
+    );
   }
 
   addSuccess(message: string) {
