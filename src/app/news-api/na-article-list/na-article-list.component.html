@@ -7,6 +7,8 @@
     [href]="article.url"
     target="_blank"
   >
-    {{ article.title | trimOutletName: article.source.name }}
+    {{ article.title | trimOutletName : article.source.name }}
   </a>
 </div>
+
+<app-paginator></app-paginator>

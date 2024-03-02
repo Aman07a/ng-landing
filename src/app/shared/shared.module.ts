@@ -5,5 +5,6 @@ import { PaginatorComponent } from './paginator/paginator.component';
 @NgModule({
   declarations: [PaginatorComponent],
   imports: [CommonModule],
+  exports: [PaginatorComponent],
 })
 export class SharedModule {}
